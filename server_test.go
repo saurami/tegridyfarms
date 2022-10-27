@@ -7,21 +7,37 @@ import (
 )
 
 func TestContextRoot(t *testing.T) {
-    //request := httptest.NewRequest("GET", "/", nil)
     request, err := http.NewRequest("GET", "/", nil)
     if err != nil {
-        t.Errorf("Unable to reach endpoint: %v", err)
+        t.Fatalf("Unable to reach endpoint: %v", err)
     }
+
     response := httptest.NewRecorder()
 
     handler := http.HandlerFunc(contextRoot)
     handler.ServeHTTP(response, request)
 
-    if response.Code != http.StatusOK {
-        t.Errorf("Unexpected response code... got %v, want 200", response.Code)
-    }
+    t.Run("Content", func(t *testing.T) {
+        got := response.Body.String()
+        want := "Hello, World!"
+        if got != want {
+            t.Errorf("Incorrect content ... got %v, want %v", got, want)
+        }
+    })
 
-    if response.Body.String() != "Hello, World!" {
-        t.Errorf("Unexpected response body... got %v, want 'Hello, World!'", response.Body.String())
-    }
+    t.Run("Response Code", func(t *testing.T) {
+        got := response.Code
+        want := http.StatusOK
+        if got != want {
+            t.Errorf("Unexpected response code ... got %v, want %v", got, want)
+        }
+    })
+
+    t.Run("Header", func(t *testing.T) {
+        got := response.Header().Get("Content-Type")
+        want := "text/plain; charset=utf-8"
+        if got != want {
+            t.Errorf("Incorrect content type in header ... got %v, want %v", got, want)
+        }
+    })
 }
