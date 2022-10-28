@@ -1,22 +1,23 @@
 package main
 
 import (
-    "fmt"
     "log"
     "net/http"
+    "io"
 )
 
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Hello, World!")
+func welcomeHandler(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+    io.WriteString(w, "Welcome to Tegridy Farms!")
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json; charset=utf-8")
-    w.Write([]byte(`{"server": "running", "status": "operational"}`))
+    io.WriteString(w, `{"server": "running", "status": "operational"}`)
 }
 
 func main() {
-    http.HandleFunc("/hello", helloHandler)
+    http.HandleFunc("/welcome", welcomeHandler)
     http.HandleFunc("/health", healthHandler)
     err := http.ListenAndServe("localhost:8080", nil)
     if err != nil {

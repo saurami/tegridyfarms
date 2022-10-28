@@ -6,20 +6,20 @@ import (
     "testing"
 )
 
-func TestHelloHandler(t *testing.T) {
-    request, err := http.NewRequest("GET", "/hello", nil)
+func TestWelcomeHandler(t *testing.T) {
+    request, err := http.NewRequest("GET", "/welcome", nil)
     if err != nil {
         t.Fatalf("Unable to reach endpoint: %v", err)
     }
 
     response := httptest.NewRecorder()
 
-    handler := http.HandlerFunc(helloHandler)
+    handler := http.HandlerFunc(welcomeHandler)
     handler.ServeHTTP(response, request)
 
-    t.Run("Content", func(t *testing.T) {
+    t.Run("Content", func(t *testing.T){
         got := response.Body.String()
-        want := "Hello, World!"
+        want := "Welcome to Tegridy Farms!"
         if got != want {
             t.Errorf("Incorrect content ... got %v, want %v", got, want)
         }
@@ -37,10 +37,11 @@ func TestHelloHandler(t *testing.T) {
         got := response.Header().Get("Content-Type")
         want := "text/plain; charset=utf-8"
         if got != want {
-            t.Errorf("Incorrect content type in header ... got %v, want %v", got, want)
+            t.Errorf("Incorrect content header ... got %v, want %v", got, want)
         }
     })
 }
+
 
 func TestHealthHandler(t *testing.T) {
     request, err := http.NewRequest("GET", "/health", nil)
