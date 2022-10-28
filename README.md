@@ -6,10 +6,10 @@ Single Page Application based on South Park's Tegridy Farms
 
 + Test HTTP server
 
-  `go test server.go server_test.go`
+  `make test_all`
 
 + Run HTTP server
 
   `go run server.go`
 
-+ Navigate to `http://localhost:8080` in a browser to see the content
++ Navigate to `http://localhost:8080/welcome` in a browser to see the content
