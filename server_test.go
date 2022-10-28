@@ -6,15 +6,15 @@ import (
     "testing"
 )
 
-func TestContextRoot(t *testing.T) {
-    request, err := http.NewRequest("GET", "/", nil)
+func TestHelloHandler(t *testing.T) {
+    request, err := http.NewRequest("GET", "/hello", nil)
     if err != nil {
         t.Fatalf("Unable to reach endpoint: %v", err)
     }
 
     response := httptest.NewRecorder()
 
-    handler := http.HandlerFunc(contextRoot)
+    handler := http.HandlerFunc(helloHandler)
     handler.ServeHTTP(response, request)
 
     t.Run("Content", func(t *testing.T) {
@@ -38,6 +38,42 @@ func TestContextRoot(t *testing.T) {
         want := "text/plain; charset=utf-8"
         if got != want {
             t.Errorf("Incorrect content type in header ... got %v, want %v", got, want)
+        }
+    })
+}
+
+func TestHealthHandler(t *testing.T) {
+    request, err := http.NewRequest("GET", "/health", nil)
+    if err != nil {
+        t.Fatalf("Unable to reach endpoint: %v", err)
+    }
+
+    response := httptest.NewRecorder()
+
+    handler := http.HandlerFunc(healthHandler)
+    handler.ServeHTTP(response, request)
+
+    t.Run("Content", func(t *testing.T){
+        got := response.Body.String()
+        want := `{"server": "running", "status": "operational"}`
+        if got != want {
+            t.Errorf("Incorrect content ... got %v, want %v", got, want)
+        }
+    })
+
+    t.Run("Response Code", func(t *testing.T) {
+        got := response.Code
+        want := http.StatusOK
+        if got != want {
+            t.Errorf("Unexpected response code ... got %v, want %v", got, want)
+        }
+    })
+
+    t.Run("Header", func(t *testing.T) {
+        got := response.Header().Get("Content-Type")
+        want := "application/json; charset=utf-8"
+        if got != want {
+            t.Errorf("Incorrect content header ... got %v, want %v", got, want)
         }
     })
 }
