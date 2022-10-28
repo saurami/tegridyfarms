@@ -6,20 +6,20 @@ import (
     "testing"
 )
 
-func TestWelcomeHandler(t *testing.T) {
-    request, err := http.NewRequest("GET", "/welcome", nil)
+func TestHelloHandler(t *testing.T) {
+    request, err := http.NewRequest("GET", "/hello", nil)
     if err != nil {
         t.Fatalf("Unable to reach endpoint: %v", err)
     }
 
     response := httptest.NewRecorder()
 
-    handler := http.HandlerFunc(welcomeHandler)
+    handler := http.HandlerFunc(helloHandler)
     handler.ServeHTTP(response, request)
 
     t.Run("Content", func(t *testing.T){
         got := response.Body.String()
-        want := "Welcome to Tegridy Farms!"
+        want := "Hello, World!"
         if got != want {
             t.Errorf("Incorrect content ... got %v, want %v", got, want)
         }
@@ -77,4 +77,36 @@ func TestHealthHandler(t *testing.T) {
             t.Errorf("Incorrect content header ... got %v, want %v", got, want)
         }
     })
+}
+
+func TestOutdoorHandler(t *testing.T) {
+    request, err := http.NewRequest("GET", "/outdoor", nil)
+    if err != nil {
+        t.Fatalf("Unable to reach endpoint: %v", err)
+    }
+
+    response := httptest.NewRecorder()
+
+    handler := http.HandlerFunc(outdoorHandler)
+    handler.ServeHTTP(response, request)
+
+    t.Run("Response Code", func(t *testing.T) {
+        got := response.Code
+        want := http.StatusOK
+        if got != want {
+            t.Errorf("Unexpected response code ... got %v, want %v", got, want)
+        }
+    })
+
+    t.Run("Header", func(t *testing.T) {
+        got := response.Header().Get("Content-Type")
+        want := "text/html; charset=utf-8"
+        if got != want {
+            t.Errorf("Incorrect response header ... got %v, want %v", got, want)
+        }
+    })
+
+    //if response != nil {
+    //    t.Logf("Response Body String: %v", response.Body.String())
+    //}
 }
