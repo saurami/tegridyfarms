@@ -3,6 +3,7 @@ package main
 import (
     "net/http"
     "net/http/httptest"
+    "strings"
     "testing"
 )
 
@@ -106,7 +107,10 @@ func TestOutdoorHandler(t *testing.T) {
         }
     })
 
-    //if response != nil {
-    //    t.Logf("Response Body String: %v", response.Body.String())
-    //}
+    t.Run("Content", func(t *testing.T) {
+        got := response.Body.String()
+        if !strings.Contains(got, "Tegridy Farms") {
+            t.Errorf("Outdoor sign for 'Tegridy Farms' missing... got %v", got)
+        }
+    })
 }
