@@ -13,21 +13,39 @@ type OutdoorSign struct {
 }
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
-    w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-    io.WriteString(w, "Hello, World!")
+    if r.URL.Path != "/hello" {
+        http.Error(w, "Path doesn't exist", http.StatusNotFound)
+    } else if r.Method != "GET" {
+        http.Error(w, "Method not supported", http.StatusMethodNotAllowed)
+    } else {
+        w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+        io.WriteString(w, "Hello, World!")
+    }
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
-    w.Header().Set("Content-Type", "application/json; charset=utf-8")
-    io.WriteString(w, `{"server": "running", "status": "operational"}`)
+    if r.URL.Path != "/health" {
+        http.Error(w, "Path doesn't exist", http.StatusNotFound)
+    } else if r.Method != "GET" {
+        http.Error(w, "Method not supported", http.StatusMethodNotAllowed)
+    } else {
+        w.Header().Set("Content-Type", "application/json; charset=utf-8")
+        io.WriteString(w, `{"server": "running", "status": "operational"}`)
+    }
 }
 
 func outdoorHandler(w http.ResponseWriter, r *http.Request) {
-    page := OutdoorSign{Title: "Tegridy Farms", Slogan: "Farming with Tegridy"}
-    tmpl := template.Must(template.ParseFiles("outdoor.html"))
-    err := tmpl.Execute(w, page)
-    if err != nil {
-        log.Printf("Unable to parse HTML ... %v", err)
+    if r.URL.Path != "/outdoor" {
+        http.Error(w, "Path doesn't exist", http.StatusNotFound)
+    } else if r.Method != "GET" {
+        http.Error(w, "Method not supported", http.StatusMethodNotAllowed)
+    } else {
+        page := OutdoorSign{Title: "Tegridy Farms", Slogan: "Farming with Tegridy"}
+        tmpl := template.Must(template.ParseFiles("outdoor.html"))
+        err := tmpl.Execute(w, page)
+        if err != nil {
+            log.Printf("Unable to parse HTML ... %v", err)
+        }
     }
 }
 
