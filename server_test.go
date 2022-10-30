@@ -114,3 +114,31 @@ func TestOutdoorHandler(t *testing.T) {
         }
     })
 }
+
+func TestHomeHandler(t *testing.T) {
+    request, err := http.NewRequest("GET", "/home", nil)
+    if err != nil {
+        t.Fatalf("Unable to reach endpoint: %v", err)
+    }
+
+    response := httptest.NewRecorder()
+
+    handler := http.HandlerFunc(homeHandler)
+    handler.ServeHTTP(response, request)
+
+    t.Run("Response Code", func(t *testing.T) {
+        got := response.Code
+        want := http.StatusOK
+        if got != want {
+            t.Errorf("Incorrect response code ... got %v, wamnmt %v", got, want)
+        }
+    })
+
+    t.Run("Header", func(t *testing.T) {
+        got := response.Header().Get("Content-Type")
+        want := "image/jpeg"
+        if got != want {
+            t.Errorf("Incorrect response header ... got %v, want %v", got, want)
+        }
+    })
+}
