@@ -12,4 +12,7 @@ Single Page Application based on South Park's Tegridy Farms
 
   `go run server.go`
 
-+ Navigate to `http://localhost:8080/welcome` in a browser to see the content
++ To view content, navigate to
+
+  1. Homepage (Image): http://localhost:8080/home
+  2. Welcome (HTML):  http://localhost:8080/welcome
