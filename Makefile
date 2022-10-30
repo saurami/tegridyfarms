@@ -2,6 +2,10 @@ test_all:
 	echo "Executing all tests"
 	go test server.go server_test.go -v
 
+test_home:
+	echo "Executing tests for /home endpoint"
+	go test -run TestHomeHandler -v
+
 test_hello:
 	echo "Executing tests for /hello endpoint"
 	go test -run TestHelloHandler -v
