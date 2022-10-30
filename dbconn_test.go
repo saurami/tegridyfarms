@@ -8,15 +8,14 @@ func TestSqliteConnect(t *testing.T) {
 
     t.Run("Ping database", func(t *testing.T) {
         if db.Ping() != nil {
-            t.Errorf("Unable to ping database ...")
+            t.Errorf("Unable to ping in-memory sqlite database ... %v", db.Ping())
         }
     })
 
     db.Close()
     
     t.Run("Open Connections", func(t *testing.T) {
-        got := db.Stats().OpenConnections
-        if got != 0 {
+        if db.Stats().OpenConnections != 0 {
             t.Errorf("Umable to close database connections ... %v", db.Stats().OpenConnections)
         }
     })
