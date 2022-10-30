@@ -5,6 +5,8 @@ import (
     "net/http"
     "html/template"
     "io"
+    "os"
+    //"image/jpeg"
 )
 
 type OutdoorSign struct {
@@ -49,7 +51,24 @@ func outdoorHandler(w http.ResponseWriter, r *http.Request) {
     }
 }
 
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+    if r.URL.Path != "/home" {
+        http.Error(w, "Path doesn't exist", http.StatusNotFound)
+    } else if r.Method != "GET" {
+        http.Error(w, "Method not supported", http.StatusMethodNotAllowed)
+    } else {
+        file, err := os.Open("./tegridy_home.jpeg")
+        if err != nil {
+            log.Printf("Unable to open file: %v", err)
+        }
+        defer file.Close()
+        w.Header().Set("Content-Type", "image/jpeg")
+        io.Copy(w, file)
+    }
+}
+
 func main() {
+    http.HandleFunc("/home", homeHandler)
     http.HandleFunc("/hello", helloHandler)
     http.HandleFunc("/health", healthHandler)
     http.HandleFunc("/outdoor", outdoorHandler)
