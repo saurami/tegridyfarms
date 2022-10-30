@@ -1,0 +1,42 @@
+name: Cross-Platform CI
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.18
+
+    - name: Go Security Scanner
+      uses: securego/gosec@master
+      with:
+        args: ./...
+
+  testing:
+    needs: [security]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.18
+
+    - name: Get dependencies and run all tests
+      run: |
+	    go mod tidy
+		make test_all
