@@ -13,3 +13,7 @@ test_health:
 test_outdoor:
 	echo "Executing tests for /outdoor endpoint"
 	go test -run TestOutdoorHandler -v
+
+test_database:
+	echo "Testing local in-memory sqlite database"
+	go test dbconn.go dbconn_test.go -v
