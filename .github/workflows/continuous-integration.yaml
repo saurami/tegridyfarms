@@ -1,4 +1,4 @@
-name: Testing web application
+name: Tegridy
 
 on:
   push:
