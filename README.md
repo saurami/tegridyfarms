@@ -1,4 +1,4 @@
-[![Tegridy](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/continuous-integration.yaml/badge.svg)](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/continuous-integration.yaml)
+[![Tegridy](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/testing.yaml/badge.svg)](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/testing.yaml)
 
 # Tegridy Farms
 
