@@ -10,7 +10,12 @@ Single Page Application based on South Park's Tegridy Farms
 
   `go run server.go`
 
-+ To view content, navigate to
++ To view text content, navigate to:
+
+  1. Hello, World!: http://localhost:8080/hello
+  2. Server Health: http://localhost:8080/health
+
++ To view rendered content, navigate to:
 
   1. Homepage (Image): http://localhost:8080/home
   2. Outdoor  (HTML):  http://localhost:8080/outdoor
