@@ -1,4 +1,5 @@
 [![Tegridy](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/testing.yaml/badge.svg)](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/testing.yaml)
+[![Tegridy](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/testing.yaml/badge.svg)](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/testing.yaml)
 
 # Tegridy Farms
 
@@ -17,4 +18,4 @@ Single Page Application based on South Park's Tegridy Farms
 + To view content, navigate to
 
   1. Homepage (Image): http://localhost:8080/home
-  2. Welcome (HTML):  http://localhost:8080/welcome
+  2. Outdoor  (HTML):  http://localhost:8080/outdoor
