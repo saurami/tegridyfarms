@@ -1,5 +1,4 @@
 [![Tegridy](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/testing.yaml/badge.svg)](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/testing.yaml)
-[![Tegridy](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/testing.yaml/badge.svg)](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/testing.yaml)
 
 # Tegridy Farms
 
