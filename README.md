@@ -6,10 +6,6 @@ Single Page Application based on South Park's Tegridy Farms
 
 ## Getting Started
 
-+ Test HTTP server
-
-  `make test_all`
-
 + Run HTTP server
 
   `go run server.go`
