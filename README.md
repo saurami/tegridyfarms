@@ -1,3 +1,5 @@
+[![Tegridy](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/continuous-integration.yaml/badge.svg)](https://github.com/saurabhmshr/tegridyfarms/actions/workflows/continuous-integration.yaml)
+
 # Tegridy Farms
 
 Single Page Application based on South Park's Tegridy Farms
