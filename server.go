@@ -6,7 +6,6 @@ import (
     "html/template"
     "io"
     "os"
-    //"image/jpeg"
 )
 
 type OutdoorSign struct {
@@ -43,7 +42,7 @@ func outdoorHandler(w http.ResponseWriter, r *http.Request) {
         http.Error(w, "Method not supported", http.StatusMethodNotAllowed)
     } else {
         page := OutdoorSign{Title: "Tegridy Farms", Slogan: "Farming with Tegridy"}
-        tmpl := template.Must(template.ParseFiles("outdoor.html"))
+        tmpl := template.Must(template.ParseFiles("./web/template/outdoor.html"))
         err := tmpl.Execute(w, page)
         if err != nil {
             log.Printf("Unable to parse HTML ... %v", err)
@@ -57,7 +56,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
     } else if r.Method != "GET" {
         http.Error(w, "Method not supported", http.StatusMethodNotAllowed)
     } else {
-        file, err := os.Open("./tegridy_home.jpeg")
+        file, err := os.Open("./web/static/tegridy_home.jpeg")
         if err != nil {
             log.Printf("Unable to open file: %v", err)
         }
