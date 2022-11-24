@@ -17,3 +17,7 @@ test_home:
 test_outdoor:
 	echo "Executing tests for /outdoor endpoint"
 	go test -v ./pkg/controller -run TestOutdoorHandler
+
+test_get_products:
+	echo "Executing tests for /products endpoint"
+	go test -v ./pkg/controller -run TestGetProducts
