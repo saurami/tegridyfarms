@@ -2,7 +2,7 @@ test_app:
 	echo "Executing application tests (collectively)"
 	go test -v ./pkg/controller/app.go ./pkg/controller/app_test.go
 
-test_health:
+test_app_health:
 	echo "Executing tests for /health endpoint"
 	go test -v ./pkg/controller -run TestHealthHandler
 
@@ -21,3 +21,7 @@ test_outdoor:
 test_get_products:
 	echo "Executing tests for /products endpoint"
 	go test -v ./pkg/controller -run TestGetProducts
+
+test_toy_database:
+	echo "Executing tests for local SQLite database"
+	go test -v ./config/dbconn.go ./config/dbconn_test.go
