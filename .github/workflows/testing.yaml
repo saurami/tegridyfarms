@@ -22,4 +22,4 @@ jobs:
     - name: Get dependencies and run all tests
       run: |
         go mod tidy
-        make test_all
+        make test_app
