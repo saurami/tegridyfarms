@@ -19,7 +19,12 @@ jobs:
       with:
         go-version: 1.19
 
-    - name: Get dependencies and run all tests
+    - name: Get dependencies and run all tests collectively
       run: |
         go mod tidy
         make test_app
+
+    - name: Run individual tests
+      run: |
+        make test_health
+		make test_get_products
