@@ -27,4 +27,4 @@ jobs:
     - name: Run individual tests
       run: |
         make test_health
-		make test_get_products
+        make test_get_products
