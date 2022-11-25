@@ -29,3 +29,8 @@ test_toy_database:
 test_coverage:
 	echo "Running test coverage for project"
 	go test -v -race -coverprofile=coverage.out -covermode=atomic ./...
+
+generate_coverage_report:
+	echo "Generate coverage report (HTML)"
+	go test -v -coverprofile cover.out ./...
+	go tool cover -html cover.out -o cover.html
