@@ -25,3 +25,7 @@ test_get_products:
 test_toy_database:
 	echo "Executing tests for local SQLite database"
 	go test -v ./config/dbconn.go ./config/dbconn_test.go
+
+test_coverage:
+	echo "Running test coverage for project"
+	go test -race -coverprofile=coverage.out -covermode=atomic
