@@ -28,4 +28,4 @@ test_toy_database:
 
 test_coverage:
 	echo "Running test coverage for project"
-	go test -race -coverprofile=coverage.out -covermode=atomic
+	go test -v -race -coverprofile=coverage.out -covermode=atomic ./...
