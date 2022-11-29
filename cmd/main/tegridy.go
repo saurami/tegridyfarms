@@ -13,6 +13,7 @@ func main() {
     http.HandleFunc("/outdoor", controller.OutdoorHandler)
     http.HandleFunc("/products", controller.GetProducts)
     http.HandleFunc("/products/", controller.RetrieveProduct)
+    http.HandleFunc("/product", controller.CreateProduct)
     
     err := http.ListenAndServe("127.0.0.1:8080", nil)
     if err != nil {
