@@ -33,3 +33,20 @@ func RetrieveProduct(w http.ResponseWriter, r *http.Request) {
         }
     }
 }
+
+func CreateProduct(w http.ResponseWriter, r *http.Request) {
+    if r.URL.Path != "/product" {
+        http.Error(w, "Invalid path", http.StatusNotFound)
+    } else if r.Method != "POST" {
+        http.Error(w, "Method not supported", http.StatusMethodNotAllowed)
+    } else {
+        w.Header().Set("Content-Type", "application/json")
+        var newProduct model.Product
+        if err := json.NewDecoder(r.Body).Decode(&newProduct); err != nil {
+            http.Error(w, "Unable to parse given data to specified data format", http.StatusNotAcceptable)
+        } else {
+            model.Products = append(model.Products, newProduct)
+            json.NewEncoder(w).Encode(newProduct)
+        }
+    }
+}
