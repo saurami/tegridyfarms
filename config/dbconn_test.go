@@ -10,7 +10,7 @@ func TestSqliteConnect(t *testing.T) {
 
     t.Run("Ping database", func(t *testing.T) {
         if db.Ping() != nil {
-            t.Errorf("Unable to ping in-memory sqlite database ... %v", db.Ping())
+            t.Errorf("Unable to ping sqlite database ... %v", db.Ping())
         }
     })
 
@@ -18,7 +18,7 @@ func TestSqliteConnect(t *testing.T) {
 
     t.Run("Open Connections", func(t *testing.T) {
         if db.Stats().OpenConnections != 0 {
-            t.Errorf("Umable to close database connections ... %v", db.Stats().OpenConnections)
+            t.Errorf("Unable to close database connections ... %v", db.Stats().OpenConnections)
         }
     })
 }
@@ -26,7 +26,7 @@ func TestSqliteConnect(t *testing.T) {
 func TestReadProducts(t *testing.T) {
     got, err := readProducts()
 
-    t.Run("Available product", func(t *testing.T) {
+    t.Run("Product available in products", func(t *testing.T) {
         var result bool = false
         for _, product := range got {
             if product.Name == "Tegridy Jungle Bud" {
@@ -43,6 +43,16 @@ func TestReadProducts(t *testing.T) {
     t.Run("No error", func(t *testing.T) {
         if err != nil {
             t.Errorf("Error is not nil ... %v", err)
+        }
+    })
+}
+
+func TestRetrieveProduct(t *testing.T) {
+    got := retrieveProduct("Green Willy Stranger")
+
+    t.Run("Product exists; No error", func(t *testing.T) {
+        if got != nil {
+            t.Errorf("Received error: %v", got)
         }
     })
 }
