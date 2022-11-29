@@ -29,14 +29,29 @@ func readProducts() ([]Products, error) {
     }
     defer rows.Close()
 
-    var product []Products
+    var allProducts []Products
     for rows.Next() {
         var item Products
         if err := rows.Scan(&item.Name, &item.Updated); err != nil {
             log.Fatalf("Data error on table row: %v", err)
             return nil, err
         }
-        product = append(product, item)
+        allProducts = append(allProducts, item)
     }
-    return product, nil
+    return allProducts, nil
+}
+
+func retrieveProduct(name string) error {
+    db := sqliteConnect()
+    row := db.QueryRow("SELECT * FROM product WHERE name=?", name)
+    if row == nil {
+        log.Fatalf("Error with record: %v", row)
+    }
+
+    var product Products
+    if err := row.Scan(&product.Name, &product.Updated); err != nil {
+        log.Fatalf("Data error in table row: %v", err)
+        return err
+    }
+    return nil
 }
