@@ -12,6 +12,8 @@ func main() {
     http.HandleFunc("/health", controller.HealthHandler)
     http.HandleFunc("/outdoor", controller.OutdoorHandler)
     http.HandleFunc("/products", controller.GetProducts)
+    http.HandleFunc("/products/", controller.RetrieveProduct)
+    
     err := http.ListenAndServe("127.0.0.1:8080", nil)
     if err != nil {
         log.Fatalf("Unable to start HTTP server: %v", err)
