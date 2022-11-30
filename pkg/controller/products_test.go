@@ -75,6 +75,7 @@ func TestRetrieveExistingProduct(t *testing.T) {
 
 	t.Run("Content", func(t *testing.T) {
 		var singleProduct model.Product
+		// cannot be used in a subsequent subtest because response data gets consumed
 		err := json.NewDecoder(response.Body).Decode(&singleProduct)
 		if err != nil {
 			t.Errorf("Error parsing response data into product structure: %v", err)
