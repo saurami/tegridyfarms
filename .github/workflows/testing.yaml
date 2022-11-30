@@ -24,6 +24,8 @@ jobs:
         go mod tidy
         make test_app_health
         make test_get_products
+		make test_retrieve_product
+		make test_create_product
         make test_toy_database
 
     - name: Run all tests and coverage

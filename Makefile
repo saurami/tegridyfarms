@@ -22,6 +22,14 @@ test_get_products:
 	echo "Executing tests for /products endpoint"
 	go test -v ./pkg/controller -run TestGetProducts
 
+test_retrieve_product:
+	echo "Executing tests for /product/:name endpoint"
+	go test -v ./pkg/controller -run TestRetrieveExistingProduct
+
+test_create_product:
+	echo "Executing test for /product endpoint"
+	go test -v ./pkg/controller -run TestCreateProduct
+
 test_toy_database:
 	echo "Executing tests for local SQLite database"
 	go test -v ./config/dbconn.go ./config/dbconn_test.go
