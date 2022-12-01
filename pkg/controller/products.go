@@ -55,8 +55,23 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 	if productName == "" {
 		http.Error(w, "Invalid product name", http.StatusNotFound)
 	} else {
-		//    TO DO
 		w.Header().Set("Content-Type", "application/json")
+		for _, product := range model.Products {
+			if product.Name == productName {
+				i := slices.IndexFunc(model.Products, func(p model.Product) bool {
+					return p.Name == productName
+				})
+				var changedProduct model.Product
+				if err := json.NewDecoder(r.Body).Decode(&changedProduct); err != nil {
+					http.Error(w, "Unable to parse data to defined format", http.StatusNotAcceptable)
+				} else {
+					model.Products = append(model.Products[:i], model.Products[i+1:]...)
+					changedProduct.Name = productName
+					model.Products = append(model.Products, changedProduct)
+					json.NewEncoder(w).Encode(changedProduct)
+				}
+			}
+		}
 	}
 }
 
@@ -68,13 +83,11 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		for _, product := range model.Products {
 			if product.Name == productName {
-				// get index of product name
-				// use index to call delete
-				//i := slices.Index(model.Products, product.Name)
 				i := slices.IndexFunc(model.Products, func(p model.Product) bool {
 					return p.Name == product.Name
 				})
-				model.Products = slices.Delete(model.Products, i, i+1)
+				model.Products = slices.Delete(model.Products, i, i+1) // alternatively
+				// model.Products = append(model.products[:i], model.Products[i+1:]...)
 				break
 			}
 		}
