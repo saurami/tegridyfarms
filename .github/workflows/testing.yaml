@@ -1,4 +1,4 @@
-name: Tegridy
+gname: Tegridy
 
 on:
   push:
@@ -26,6 +26,8 @@ jobs:
         make test_get_products
         make test_retrieve_product
         make test_create_product
+        make test_update_product
+        make test_delete_product
         make test_toy_database
 
     - name: Run all tests and coverage
