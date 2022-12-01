@@ -20,8 +20,8 @@ REST-API based on South Park's Tegridy Farms
   1. Homepage (Image): http://127.0.0.1:8080/home
   2. Outdoor  (HTML):  http://127.0.0.1:8080/outdoor
 
-+ Retrieve list of all products:
++ Perform create, read, update, and delete operations:
 
   ```
-  curl 127.0.0.1:8080/products
+  ./config/product_ops.sh
   ```
