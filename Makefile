@@ -23,12 +23,20 @@ test_get_products:
 	go test -v ./pkg/controller -run TestGetProducts
 
 test_retrieve_product:
-	echo "Executing tests for /product/:name endpoint"
+	echo "Executing tests for /product/:name with GET"
 	go test -v ./pkg/controller -run TestRetrieveExistingProduct
 
 test_create_product:
 	echo "Executing test for /product endpoint"
 	go test -v ./pkg/controller -run TestCreateProduct
+
+test_update_product:
+	echo "Executing tests for /products/:name with PUT"
+	go test -v ./pkg/controller -run TestUpdateExistingProduct
+
+test_delete_product:
+	echo "Executing tests for /products/:name with DELETE"
+	go test -v ./pkg/controller -run TestDeleteExistingProduct
 
 test_toy_database:
 	echo "Executing tests for local SQLite database"
