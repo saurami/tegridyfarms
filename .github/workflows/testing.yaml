@@ -22,18 +22,18 @@ jobs:
     - name: Get dependencies and run individual tests
       run: |
         go mod tidy
-        make test_app_health
-        make test_get_products
-        make test_retrieve_product
-        make test_create_product
-        make test_update_product
-        make test_delete_product
-        make test_toy_database
+        # make test_app_health
+        # make test_get_products
+        # make test_retrieve_product
+        # make test_create_product
+        # make test_update_product
+        # make test_delete_product
+        # make test_toy_database
 
     - name: Run all tests and coverage
       run: |
-        make test_app
-        make test_coverage
+        # make test_app
+        # make test_coverage
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
